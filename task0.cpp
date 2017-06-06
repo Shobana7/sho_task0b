@@ -61,16 +61,23 @@ void kamal( vector<int> curtain_qty,vector<int> cus_query,int num,int query)
 		 } 
 	
 	else if(flag==0)
-	     { int s,d; 
-		   int diff = abs(curtain_qty[0]-cus_query[k]);
+	     { int s,d,r,pos; 
+		   
 		   for(s=0;s<num;s++)
 		   {t=0;
-		   d=curtain_qty[s]-cus_query[k];
-		   	 if(d<=diff && d>0)
-		      {t=1;
-			  curtain_qty[s]-= cus_query[k];
-		      break;}
-		   }
+		   d=cus_query[k]-curtain_qty[s];
+		   	 if(d<0)
+		   	 { t=1;pos=s;
+				for(r=s+1;r<num;r++)
+		   	      {int diff = cus_query[k]-curtain_qty[r];
+					if(diff<0 && diff>d)
+					{
+					pos=r;
+					d=diff;
+					    } 
+		                 }
+		          curtain_qty[pos]-=cus_query[k];break;
+		         }
         if(t==1)
 	     {
 	       for(s=0;s<num;s++)
